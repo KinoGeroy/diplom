@@ -3,6 +3,7 @@ import ConfirmButton from "../components/ConfirmButton";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
+import {registerPOST} from "../Api";
 
 const Registration = () => {
     const navigate = useNavigate();//принудительный редерект
@@ -14,12 +15,14 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleRegister = async (data) => {
-        return await axios.post('http://31.128.36.9:81/api/register', data, {
-            headers:
-                {'Accept': 'application/json'}
-        });
-    }
+    // const handleRegister = async (data) => {
+    //     return await axios.post('http://31.128.36.9:81/api/register', data, {
+    //         headers:
+    //             {'Accept': 'application/json'}
+    //     });
+    // }
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +35,7 @@ const Registration = () => {
         // todo валидация
         // const errors = formValidation(formData);
         // если 0 ошибок ->
-        handleRegister(formData).then((response) => {
+        registerPOST(formData).then((response) => {
             // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 
             if (response?.data && response.data.token) {
@@ -44,7 +47,7 @@ const Registration = () => {
                 navigate('/verify');
             }
 
-        }).catch(error => {
+        }).catch((error) => {
             if (error.response.status === 409) {
                 console.log("ПОЧТА УЖЕ ЗАРЕГЕСТРИРОВАНА");
             } else if (error.response.status === 404) {

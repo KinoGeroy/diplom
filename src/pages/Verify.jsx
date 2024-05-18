@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import {sendPOST} from "../Api";
+import {useNavigate} from "react-router-dom";
 
 const Verify = () => {
     const [email_verification_token, setEmail_verification_token] = useState('');
+    const navigate = useNavigate();
 
     const handlerSubmit =  (e) => {
         e.preventDefault();
 
         if (!email_verification_token.length) return;
-
 
         const token = {
             email_verification_token
@@ -16,6 +17,8 @@ const Verify = () => {
 
         sendPOST(token).then((response) => {
             console.log(response);
+            console.log(token);
+            navigate('/main');
         });
     }
 

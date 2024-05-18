@@ -7,7 +7,7 @@ const WelcomePage = () => {
     return (
         <div>
             <LinkButton props={{link: "/registration", title: "РЕГИСТРАЦИЯ"}}/>
-            <LinkButton props={{link: "/enter", title: "ВХОД"}}/>
+            <LinkButton props={{link: "/login", title: "ВХОД"}}/>
         </div>
     );
 };

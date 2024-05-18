@@ -3,14 +3,12 @@ import {getUser} from "../Api";
 
 const User = () => {
     useEffect(() => {
-        getUser().then((response) => {
-            console.log(response);
-        });
-
+        getUser().then();
     },[]);
 
     return (
         <div>
+
         </div>
     );
 };
