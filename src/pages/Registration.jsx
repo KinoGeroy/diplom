@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ConfirmButton from "../components/ConfirmButton";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
 import {registerPOST} from "../Api";
 
 const Registration = () => {
-    const navigate = useNavigate();//принудительный редерект
-    //const location = useLocation();
-
-    // location.pathname === '/main';
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -22,16 +19,11 @@ const Registration = () => {
             email,
             password,
         };
+
         // todo валидация
-        // const errors = formValidation(formData);
         console.log(!username, !password);
         if (!username || !password) return;
 
-
-        // useEffect(() => {
-        //
-        // }, [username, email, password]);
-        // если 0 ошибок ->
         registerPOST(formData).then((response) => {
             console.log(response)
             if (response?.data && response.data.token) {

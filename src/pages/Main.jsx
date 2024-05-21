@@ -41,11 +41,11 @@ const Main = () => {
                 {userData?.name}
             </span>
             <div>
-                {!userData?.is_subscribed ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription_end_date}
-                {userData?.subscription_type ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету'}
+                {!userData?.subscription.active ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription.end_date}
+                {userData?.subscription.subscription_id ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету'}
             </div>
             <div>
-            {/*    todo инфа о проектах*/}
+            {/*todo инфа о проектах*/}
             </div>
 
             <button type={"button"} onClick={handleLogout}>
