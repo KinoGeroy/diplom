@@ -1,28 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ConfirmButton from "../components/ConfirmButton";
-import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
 import {registerPOST} from "../Api";
 
 const Registration = () => {
     const navigate = useNavigate();//принудительный редерект
-    const location = useLocation();//
+    //const location = useLocation();
 
     // location.pathname === '/main';
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // const handleRegister = async (data) => {
-    //     return await axios.post('http://31.128.36.9:81/api/register', data, {
-    //         headers:
-    //             {'Accept': 'application/json'}
-    //     });
-    // }
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,26 +24,24 @@ const Registration = () => {
         };
         // todo валидация
         // const errors = formValidation(formData);
+        console.log(!username, !password);
+        if (!username || !password) return;
+
+
+        // useEffect(() => {
+        //
+        // }, [username, email, password]);
         // если 0 ошибок ->
         registerPOST(formData).then((response) => {
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
+            console.log(response)
             if (response?.data && response.data.token) {
                 const token = response.data.token;
-                console.log(token);
                 localStorage.setItem(LS_TOKEN, token);
 
-                //redirect на подтверждение
                 navigate('/verify');
             }
-
-        }).catch((error) => {
-            if (error.response.status === 409) {
-                console.log("ПОЧТА УЖЕ ЗАРЕГЕСТРИРОВАНА");
-            } else if (error.response.status === 404) {
-                console.log("страница не найдена");
-            }
-            console.error(error);
+        }).catch(error => {
+            console.log(error);
         });
     }
 
@@ -76,7 +64,6 @@ const Registration = () => {
             </label>
             <input type={"password"} onChange={(e) => setPassword(e.target.value)}/>
 
-            {/*<Link to={'/registration/verify'} >*/}
             <ConfirmButton type={'submit'}>
                 СОСАТЬЬЬ
             </ConfirmButton>

@@ -1,14 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
-import {logoutPOST} from "../Api";
+import {getUser, logoutPOST} from "../Api";
+import SubscriptionType from "../components/SubscriptionType";
 
 const Main = () => {
     const navigate = useNavigate();
-    //todo logout - удаление токена - дроп на главную
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        const token = localStorage.getItem(LS_TOKEN);
+        if (!token) navigate('/');
+        return;
+    }, [navigate]);
+
+    useEffect(() => {
+        getUser().then((response) => {
+            if (response?.data) {
+                setUserData(response.data);
+                console.log(response?.data);
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+    }, []);
+
     const handleLogout = () => {
         logoutPOST().then((response) => {
-            console.log(response);
+            console.log('LogOut');
         }).catch((error) => {
             console.log(error);
         });
@@ -18,7 +37,16 @@ const Main = () => {
 
     return (
         <div>
-            qwe
+            <span>
+                {userData?.name}
+            </span>
+            <div>
+                {!userData?.is_subscribed ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription_end_date}
+                {userData?.subscription_type ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету'}
+            </div>
+            <div>
+            {/*    todo инфа о проектах*/}
+            </div>
 
             <button type={"button"} onClick={handleLogout}>
                 logout

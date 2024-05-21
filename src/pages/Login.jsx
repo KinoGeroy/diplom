@@ -19,13 +19,14 @@ const Login = () => {
             console.log(response);
             if (response?.data && response.data.token) {
                 const token = response.data.token;
-                console.log(token);
                 localStorage.setItem(LS_TOKEN, token);
                 navigate('/main')
             }
             // const token = response.data.token;
             // localStorage.setItem(LS_TOKEN, token);
-            navigate('/main');
+            // navigate('/main');
+        }).catch(error => {
+            console.log(error);
         });
     }
 

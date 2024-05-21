@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {sendPOST} from "../Api";
+import {verifyPOST} from "../Api";
 import {useNavigate} from "react-router-dom";
 
 const Verify = () => {
@@ -15,9 +15,7 @@ const Verify = () => {
             email_verification_token
         }
 
-        sendPOST(token).then((response) => {
-            console.log(response);
-            console.log(token);
+        verifyPOST(token).then((response) => {
             navigate('/main');
         });
     }

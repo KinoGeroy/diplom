@@ -1,12 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-const LinkButton = (props) => {
-    const data = props.props;
-    console.log(data);
+const LinkButton = ({to, children}) => {
     return (
-        <NavLink to={data.link}>
-            {data.title}
+        <NavLink to={to}>
+            {children}
         </NavLink>
     );
 };
