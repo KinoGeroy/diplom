@@ -82,6 +82,35 @@ export const getUser = async () => {
     return await GET('/user');
 }
 
+export const getProjects = async () => {
+    return await GET('/projects');
+}
+
+export const getProject = async (url) => {
+    return await GET('/project/' + url);
+}
+
+export const projectPOST = async ({url}, data) => {
+    console.log(url);
+    return await POST('/project/' + url + '/add/task', data);
+}
+
+export const getProjectFile = async (url) => {
+    return await GET('/project/' + url + '/download', {}, {
+        responseType: 'blob',
+    });
+}
+
+export const projectPost = async (data) => {
+    return await axios.post(API_URL + '/projects/add', data, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem(LS_TOKEN) ?? '',
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+}
+
 export const getSubscriptions = async () => {
     return await axios.get(API_URL + '/subscriptions', {
         headers: {

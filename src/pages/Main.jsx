@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
-import {getUser, logoutPOST} from "../Api";
+import {getProjects, getUser, logoutPOST, projectPost} from "../Api";
 import SubscriptionType from "../components/SubscriptionType";
+import ProjectList from "../components/ProjectList";
+import NewProject from "../components/NewProject";
 
 const Main = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState();
+    // const [childData, setChildData] = useState('');
+    //
+    // const handleSetChildData = (value) => {
+    //     setChildData(value);
+    // }
 
     useEffect(() => {
         const token = localStorage.getItem(LS_TOKEN);
@@ -18,10 +25,10 @@ const Main = () => {
         getUser().then((response) => {
             if (response?.data) {
                 setUserData(response.data);
-                console.log(response?.data);
+                // console.log(response?.data);
             }
         }).catch(error => {
-            console.log(error)
+            console.log(error);
         });
     }, []);
 
@@ -35,18 +42,42 @@ const Main = () => {
         navigate('/');
     }
 
+    // const getProj = () => {
+    //     getProjects().then((response) => {
+    //         if (response?.data) {
+    //             setProjects(response.data);
+    //             console.log(response?.data);
+    //         }
+    //     }).catch(error => {
+    //         console.log(error, 'pojList')
+    //     });
+    // }
+    //
+    // const create = (inputData) => {
+    //     projectPost(inputData).then((response) => {
+    //         console.log(response);
+    //         return getProj();
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
+
+
     return (
         <div>
             <span>
                 {userData?.name}
             </span>
             <div>
-                {!userData?.subscription.active ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription.end_date}
-                {userData?.subscription.subscription_id ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету'}
+                {!userData?.subscription ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription.end_date}
+                {userData?.subscription && (userData?.subscription.subscription_id ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету')}
             </div>
             <div>
-            {/*todo инфа о проектах*/}
+                {userData?.subscription && (userData?.subscription.active && (<ProjectList/>))}
             </div>
+            {/*<div>*/}
+            {/*    <NewProject/>*/}
+            {/*</div>*/}
 
             <button type={"button"} onClick={handleLogout}>
                 logout
