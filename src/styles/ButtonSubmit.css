@@ -1,0 +1,29 @@
+.button-submit {
+    font-family: 'RobotoCondensed-Light', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    border: none;
+    background-color: #f5f0e5;
+    color: #a1824a;
+    border-radius: 3px;
+    padding: 5px 14px;
+    text-transform: uppercase;
+}
+
+.button-submit__registration-config {
+    padding: 20px;
+}
+
+.new-project-form_create-project {
+    grid-column: 1/3;
+    margin: 0 auto;
+}
+
+.close-list {
+    text-transform: uppercase;
+}
+
+.button-submit:hover {
+    color: #ffffff;
+    background-color: #009963;
+}

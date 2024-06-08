@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-// import api from "./Api";
-import {LS_TOKEN} from "./constants";
 import axios from "axios";
 
 export const ResponseInterceptor = () => {
@@ -15,7 +13,6 @@ export const ResponseInterceptor = () => {
 
                 switch (error.response.status) {
                     case 401:
-                        // localStorage.removeItem(LS_TOKEN);
                         navigate("/");
                         console.log(error);
                         break;

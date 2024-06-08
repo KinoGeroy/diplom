@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
-import {loginPOST, sendPOST} from "../Api";
+import {loginPOST} from "../Api";
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
+import '../styles/RegistrationLoginForm.css';
+import '../styles/ButtonSubmit.css';
+import ConfirmButton from "../components/ConfirmButton";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -20,25 +23,26 @@ const Login = () => {
             if (response?.data && response.data.token) {
                 const token = response.data.token;
                 localStorage.setItem(LS_TOKEN, token);
-                navigate('/main')
+                navigate('/main');
             }
-            // const token = response.data.token;
-            // localStorage.setItem(LS_TOKEN, token);
-            // navigate('/main');
         }).catch(error => {
             console.log(error);
         });
     }
 
     return (
-        <form onSubmit={handlerSubmit}>
-            <label>Email:</label>
-            <input type={"email"} onChange={(e) => setEmail(e.target.value)}/>
+        <form onSubmit={handlerSubmit} className={'Registration-form'}>
+            <h1 className={'Registration-form__title'}>
+                Вход
+            </h1>
 
-            <label>Password:</label>
-            <input type={"password"} onChange={(e) => setPassword(e.target.value)}/>
+            <label className={'Registration-form__label'} htmlFor={'Email'}>Email:</label>
+            <input type={"email"} id={'Email'} onChange={(e) => setEmail(e.target.value)} className={'Registration-form__input'}/>
 
-            <button type={"submit"}>Войти</button>
+            <label className={'Registration-form__label'} htmlFor={'Password'}>Password:</label>
+            <input type={"password"} id={'Password'} onChange={(e) => setPassword(e.target.value)} className={'Registration-form__input'}/>
+
+            <ConfirmButton type={"submit"} classname={'button-submit__registration-config'}>Войти</ConfirmButton>
         </form>
     );
 };

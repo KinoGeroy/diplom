@@ -1,0 +1,34 @@
+.new-project-form {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.new-project-form_label {
+    text-align: end;
+    text-transform: uppercase;
+    margin: auto 0;
+}
+
+.new-project-form_input {
+    font-size: 20px;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #f5f0e5;
+    color: #a1824a;
+}
+
+.new-project-form_input:focus {
+    outline: none;
+}
+
+
+.new-project-form_input-name {
+
+}
+
+.new-project-form_input-description {
+    min-height: 100px;
+}

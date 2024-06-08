@@ -1,0 +1,30 @@
+.Registration-form {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Registration-form__label {
+    font-size: 20px;
+}
+
+.Registration-form__title {
+    text-transform: uppercase;
+}
+
+.Registration-form__input {
+    font-size: 20px;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #f5f0e5;
+    color: #a1824a;
+    text-align: center;
+    margin: 0 0 15px 0;
+}
+
+.Registration-form__input:focus {
+    outline: none;
+}

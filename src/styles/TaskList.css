@@ -1,0 +1,93 @@
+.task-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.task-list__render {
+    grid-column: 1/3;
+}
+
+.render-tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.render-tasks__titles {
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.render-tasks__title {
+    border-bottom: 1px solid #1c170d;
+    padding: 10px;
+    text-align: center;
+}
+
+.render-tasks__title:not(:last-child) {
+    border-right: 1px solid #1c170d;
+}
+
+.task {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #1c170d;
+    padding: 10px;
+    text-align: center;
+}
+
+.task-field {
+    margin: 0;
+}
+
+.task-list__field {
+    margin: auto 0;
+    padding: 10px;
+}
+
+.task-list__title {
+    grid-column: 1/3;
+}
+
+.task-list__buttons {
+    grid-column: 1/3;
+    display: flex;
+    justify-content: space-around;
+}
+
+.task-list__form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto 15px auto;
+    max-width: 600px;
+}
+
+.task-list__form-label {
+    text-transform: uppercase;
+}
+
+.task-list__form-title {
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+}
+
+.form-input__textarea {
+    min-height: 100px;
+}
+
+.task-list__form-input {
+    font-size: 20px;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #f5f0e5;
+    color: #a1824a;
+    margin: 0 0 15px 0;
+}
+
+.task-list__form-input:focus {
+    outline: none;
+}

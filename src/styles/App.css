@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'RobotoCondensed-Light';
+    src: url('/src/fonts/RobotoCondensed-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+.App {
+    font-family: 'RobotoCondensed-Light', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    max-width: 1240px;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    color: #1c170d;
+}
+
+@media (max-width: 747px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    body {
+        font-size: 12px;
+    }
+}

@@ -3,6 +3,8 @@ import ConfirmButton from "../components/ConfirmButton";
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
 import {registerPOST} from "../Api";
+import '../styles/RegistrationLoginForm.css';
+import '../styles/ButtonSubmit.css';
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -38,26 +40,26 @@ const Registration = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>
-                РЕГИСТРАЦИЯ
+        <form onSubmit={handleSubmit} className={'Registration-form'}>
+            <h1 className={'Registration-form__title'}>
+                Регистрация
             </h1>
 
-            <label>
+            <label htmlFor={'FIO'} className={'Registration-form__label'}>
                 ФИО
             </label>
-            <input type={"text"} onChange={(e) => setUsername(e.target.value)}/>
-            <label>
+            <input type={"text"} onChange={(e) => setUsername(e.target.value)} id={'FIO'} className={'Registration-form__input'}/>
+            <label htmlFor={'Email'} className={'Registration-form__label'}>
                 Почта
             </label>
-            <input type={"email"} onChange={(e) => setEmail(e.target.value)}/>
-            <label>
+            <input type={"email"} onChange={(e) => setEmail(e.target.value)} id={'Email'} className={'Registration-form__input'}/>
+            <label htmlFor={'Password'} className={'Registration-form__label'}>
                 Пароль
             </label>
-            <input type={"password"} onChange={(e) => setPassword(e.target.value)}/>
+            <input type={"password"} onChange={(e) => setPassword(e.target.value)} id={'Password'} className={'Registration-form__input'}/>
 
-            <ConfirmButton type={'submit'}>
-                СОСАТЬЬЬ
+            <ConfirmButton type={'submit'} classname={'button-submit__registration-config'}>
+                Зарегистрироваться
             </ConfirmButton>
         </form>
     );

@@ -1,0 +1,35 @@
+.projects-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.projects-list-title {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 0 0 5px 0;
+}
+
+.project-ul-field {
+    padding: 15px;
+    border-bottom: 1px solid #1c170d;
+    border-top: 1px solid #1c170d;
+    text-align: center;
+}
+
+.project-ul-field:not(:last-child) {
+    border-right: 1px solid #1c170d;
+}
+
+.projects-list--project {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border-bottom: 1px solid #1c170d;
+    text-align: center;
+    vertical-align: center;
+    margin: 0 0 5px 0;
+}
+
+.project-li-field {
+    margin: auto 0;
+}

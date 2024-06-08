@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
-import {getProjects, getUser, logoutPOST, projectPost} from "../Api";
+import {getUser, logoutPOST} from "../Api";
 import SubscriptionType from "../components/SubscriptionType";
 import ProjectList from "../components/ProjectList";
-import NewProject from "../components/NewProject";
+
+import '../styles/Main.css';
+import NavigationBar from "../components/NavigationBar";
 
 const Main = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState();
-    // const [childData, setChildData] = useState('');
-    //
-    // const handleSetChildData = (value) => {
-    //     setChildData(value);
-    // }
+
 
     useEffect(() => {
         const token = localStorage.getItem(LS_TOKEN);
@@ -25,7 +23,6 @@ const Main = () => {
         getUser().then((response) => {
             if (response?.data) {
                 setUserData(response.data);
-                // console.log(response?.data);
             }
         }).catch(error => {
             console.log(error);
@@ -42,46 +39,31 @@ const Main = () => {
         navigate('/');
     }
 
-    // const getProj = () => {
-    //     getProjects().then((response) => {
-    //         if (response?.data) {
-    //             setProjects(response.data);
-    //             console.log(response?.data);
-    //         }
-    //     }).catch(error => {
-    //         console.log(error, 'pojList')
-    //     });
-    // }
-    //
-    // const create = (inputData) => {
-    //     projectPost(inputData).then((response) => {
-    //         console.log(response);
-    //         return getProj();
-    //     }).catch((error) => {
-    //         console.log(error);
-    //     });
-    // }
-
-
     return (
-        <div>
-            <span>
-                {userData?.name}
-            </span>
-            <div>
-                {!userData?.subscription ? <SubscriptionType/> : 'ваша подписка до ' + userData?.subscription.end_date}
-                {userData?.subscription && (userData?.subscription.subscription_id ? + 2 ? 'тип подписки - Расширенная' : 'тип подписки - базовая' : 'нету')}
-            </div>
-            <div>
-                {userData?.subscription && (userData?.subscription.active && (<ProjectList/>))}
-            </div>
-            {/*<div>*/}
-            {/*    <NewProject/>*/}
-            {/*</div>*/}
+        <div className={'main'}>
+            <NavigationBar/>
+            <div className={'main-header'}>
+                <span className={'main-username'}>
+                    Пользователь: {userData?.name}
+                </span>
 
-            <button type={"button"} onClick={handleLogout}>
-                logout
-            </button>
+                <div className={'main-subscription-state'}>
+                    <span className={'main-subscription-state-date'}>
+                        {!userData?.subscription ? <SubscriptionType/> : 'Ваша подписка до - ' + userData?.subscription.end_date}
+                    </span>
+                    <span className={'main-subscription-state-type'}>
+                        {userData?.subscription && (userData?.subscription.subscription_id ? + 2 ? 'Тип подписки - Расширенная' : 'Тип подписки - базовая' : 'Подписка не оформленна')}
+                    </span>
+                </div>
+
+                <button type={"button"} onClick={handleLogout} className={'button-submit'}>
+                    logout
+                </button>
+            </div>
+
+            <div className={'main-projects-list'}>
+                {userData?.subscription ? (userData?.subscription.active && (<ProjectList/>)) : '<NewProject/>'}
+            </div>
         </div>
     );
 };

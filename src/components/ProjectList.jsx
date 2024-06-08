@@ -1,19 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {getProjects} from "../Api";
 import NewProject from "./NewProject";
-import {NavLink} from "react-router-dom";
-import Project from "./Project";
+import Project from "../pages/Project";
+import '../styles/ProjectsList.css';
+import '../styles/ButtonSubmit.css';
+import ConfirmButton from "./ConfirmButton";
+import {useNavigate} from "react-router-dom";
+
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
-    const [visible, setVisible] = useState(true);
+    // const [visible, setVisible] = useState(true);
     const [selectedProject, setSelectedProject] = useState(null);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         getProjects().then((response) => {
             if (response?.data) {
                 setProjects(response.data);
-                // console.log(response?.data);
             }
         }).catch(error => {
             console.log(error, 'pojList')
@@ -31,41 +36,53 @@ const ProjectList = () => {
         }
     }
 
-    const isVisible = () => {
-        setVisible(true);
-    }
+    // const isVisible = () => {
+    //     setVisible(true);
+    // }
 
     const handleOpenProject = (project) => {
-        setVisible(false);
+        // setVisible(false);
+
         setSelectedProject(project);
+        navigate('/project', { state: project})
     }
 
     return (
         <div>
-            {visible &&
-                (projects ? (projects.map((project) => (
-                    <div key={project.id}>
-                        <h2>Название проеткта:</h2>
-                        <button type={"button"} onClick={() => {handleOpenProject(project);}}>
-                            {project.name}
-                        </button>
-
-                        <p>
-                            <span>Описание проекта:</span>
-                            {project.description}
-                        </p>
-                        <span> Статус проекта:
-                            {projectStatus(project.status_id)}
-                        </span>
-                    </div>
-                ))) : (<NewProject/>))
+            {
+                <div className={'projects-list-title'}>
+                    <span className={'project-ul-field'}>Название проеткта</span>
+                    <span className={'project-ul-field'}>Описание проекта</span>
+                    <span className={'project-ul-field'}>Статус проекта</span>
+                </div>
             }
-            {!visible && (
-                <>
-                    <button type={"button"} onClick={isVisible}>закрыть</button>
-                    <Project project={selectedProject}/>
-                </>
-            )}
+
+            <ul className={'projects-list'}>
+                {
+                    projects ? (projects.map((project) => (
+                        <li key={project.id} className={'projects-list--project'}>
+                            <button type={"button"} onClick={() => {handleOpenProject(project);}} className={'button-submit'}>
+                                {project.name}
+                            </button>
+
+                            <p className={'project-li-field'}>
+                                {project.description}
+                            </p>
+
+                            <p className={'project-li-field'}>
+                                {projectStatus(project.status_id)}
+                            </p>
+                        </li>
+                    ))) : (<NewProject/>)
+                }
+            </ul>
+
+            {/*{!visible && (*/}
+            {/*    <div>*/}
+            {/*        <ConfirmButton type={"button"} onClick={isVisible} classname={'close-list'}>закрыть</ConfirmButton>*/}
+            {/*        <Project project={selectedProject}/>*/}
+            {/*    </div>*/}
+            {/*)}*/}
             <NewProject/>
         </div>
     );

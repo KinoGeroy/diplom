@@ -1,0 +1,20 @@
+.subscriptions-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+}
+
+.subscription-container {
+    border: 1px solid #000000;
+    max-width: 300px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.subscription-container__type {
+    display: block;
+}
+
+.subscriptions-container__title {
+    grid-column: 1/3;
+}

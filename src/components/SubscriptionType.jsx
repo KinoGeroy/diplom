@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {getSubscriptions} from "../Api";
 import {useNavigate} from "react-router-dom";
 import {LS_TOKEN} from "../constants";
+import '../styles/SubscriptionType.css';
+import '../styles/ButtonSubmit.css';
+import ConfirmButton from "./ConfirmButton";
 
 const SubscriptionType = () => {
     const [subs, setSubs] = useState([]);
@@ -36,21 +39,24 @@ const SubscriptionType = () => {
     }
 
     return (
-        <div>
+        <div className={'subscriptions-container'}>
+            <h2 className={'subscriptions-container__title'}>
+                Выбирете тип подписки!
+            </h2>
             {subs.map((sub) => (
-                <form key={sub.id} onSubmit={handleSubmit}>
-                    <span>
-                        тип подписки {sub.name}
+                <form key={sub.id} onSubmit={handleSubmit} className={'subscription-container'}>
+                    <span className={'subscription-container__type'}>
+                        Тип подписки - {sub.name}
                     </span>
                     <span>
-                        цена: {sub.price}
+                        Цена услуги - {sub.price}
                     </span>
                     <p>
-                        Описание: {sub.description}
+                        {sub.description}
                     </p>
-                    <button type={"submit"} onClick={() => {setId(sub.id)}}>
+                    <ConfirmButton type={"submit"} onClick={() => {setId(sub.id)}}>
                         купить
-                    </button>
+                    </ConfirmButton>
                 </form>
             ))}
         </div>

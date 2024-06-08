@@ -3,38 +3,6 @@ import {LS_TOKEN} from "./constants";
 
 const API_URL = 'http://31.128.36.9:81/api';
 
-const headerAu = {
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem(LS_TOKEN) ?? '',
-        Accept: 'application/json',
-    }
-};
-
-const headerAc = {
-    headers: {
-        Accept: 'application/json',
-    }
-};
-// const api = axios.create({
-//     baseURL: API_URL,
-//     // timeout: 1000,
-//     headers: {
-//         // Authorization: 'Bearer ' + localStorage.getItem(LS_TOKEN) ?? '',
-//         Accept: 'application/json',
-//     },
-// });
-
-// api.interceptors.request.use((config) => {
-//     if (localStorage.getItem(LS_TOKEN)) {
-//         config.headers["Authorization"] = "Bearer " + localStorage.getItem(LS_TOKEN);
-//     }
-//     return config;
-// });
-//
-// axios.interceptors.response.use(undefined,(error) => {
-//     console.log(error);
-// });
-
 const GET = async (url) => {
     return await axios.get(API_URL + url, {
         headers: {
@@ -96,9 +64,10 @@ export const projectPOST = async ({url}, data) => {
 }
 
 export const getProjectFile = async (url) => {
-    return await GET('/project/' + url + '/download', {}, {
-        responseType: 'blob',
-    });
+    return await axios.get(API_URL + '/project/' + url + '/download', {responseType: 'blob', headers: {
+            Authorization: 'Bearer ' + localStorage.getItem(LS_TOKEN) ?? '',
+            Accept: 'application/json',
+        }});
 }
 
 export const projectPost = async (data) => {
@@ -117,6 +86,15 @@ export const getSubscriptions = async () => {
             Accept: 'application/json',
         }
     });
+}
+
+export const deleteProject = async (url) => {
+    return await axios.delete(API_URL + '/project/' + url, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem(LS_TOKEN) ?? '',
+            Accept: 'application/json',
+        }
+    })
 }
 
 //todo прописать 401\403 для всего проекта

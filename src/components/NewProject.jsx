@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {projectPost} from "../Api";
+import '../styles/NewProject.css';
+import ConfirmButton from "./ConfirmButton";
 
 const NewProject = () => {
     const [file, setFile] = useState(null);
@@ -17,13 +19,6 @@ const NewProject = () => {
 
         const formData = new FormData();
         formData.append('file', file);
-
-        // const inputData = {
-        //     title,
-        //     projectDescription,
-        //     date,
-        //     budget
-        // }
         formData.append('title', title);
         formData.append('projectDescription', projectDescription);
         formData.append('date', date);
@@ -37,28 +32,31 @@ const NewProject = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className={'new-project-form'}>
+            <label className={'new-project-form_label'} htmlFor={'name'}>
                 Название вашего проекта:
             </label>
-            <input type={"text"} onChange={(e) => setTitle(e.target.value)}/>
-            <label>
+            <input type={'text'} id={'name'} onChange={(e) => setTitle(e.target.value)} className={'new-project-form_input new-project-form_input-name'}/>
+            <label className={'new-project-form_label'} htmlFor={'description'}>
                 Описание проекта:
             </label>
-            <input type={"text"} onChange={(e) => setProjectDescription(e.target.value)}/>
-            <label>
+            {/*<input type={"text"} id={'description'} onChange={(e) => setProjectDescription(e.target.value)}/>*/}
+            <textarea id={'description'} onChange={(e) => setProjectDescription(e.target.value)} className={'new-project-form_input new-project-form_input-description'}/>
+            <label className={'new-project-form_label'} htmlFor={'budget'}>
                 Бюджет проекта:
             </label>
-            <input type={"number"} onChange={(e) => setBudget(e.target.value)}/>
-            <label>
+            <input type={"number"} id={'budget'} onChange={(e) => setBudget(e.target.value)} className={'new-project-form_input'}/>
+            <label className={'new-project-form_label'} htmlFor={'name'}>
                 Дата окончания:
             </label>
-            <input type={"date"} onChange={(e) => setDate(e.target.value)}/>
-            Файл - тз проекта:
-            <input type={"file"} onChange={handleFile}/>
-            <button type={"submit"}>
+            <input type={"date"} onChange={(e) => setDate(e.target.value)} className={'new-project-form_input'}/>
+            <label className={'new-project-form_label'} htmlFor={'tz'}>
+                Файл - тз проекта:
+            </label>
+            <input type={"file"} id={'tz'} onChange={handleFile}/>
+            <ConfirmButton type={"submit"} classname={'new-project-form_create-project'}>
                 Создать проект
-            </button>
+            </ConfirmButton>
         </form>
     );
 };

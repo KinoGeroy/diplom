@@ -1,0 +1,25 @@
+.main {
+    display: flex;
+    /*grid-template-columns: 1fr 2fr 1fr;*/
+    flex-direction: column;
+}
+
+.main-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 0 0 20px 0;
+    align-items: center;
+}
+
+.main-username {
+ text-align: center;
+}
+
+.main-subscription-state {
+    display: flex;
+    justify-content: space-around;
+}
+
+.main-projects-list {
+    grid-column: 1/4;
+}

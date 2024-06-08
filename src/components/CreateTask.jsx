@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {projectPOST} from "../Api";
+import ConfirmButton from "./ConfirmButton";
 
 const CreateTask = (url) => {
     const [name, setName] = useState('');
@@ -23,23 +24,29 @@ const CreateTask = (url) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className={'task-list__form'}>
+            <h2 className={'task-list__form-title'}>
+                Добавить задачу
+            </h2>
+
+            <label htmlFor={'task'} className={'task-list__form-label'}>
                 Задача:
             </label>
-            <input type={"text"} onChange={(e) => setName(e.target.value)}/>
-            <label>
+            <input type={"text"} id={'task'} onChange={(e) => setName(e.target.value)} className={'task-list__form-input'}/>
+
+            <label htmlFor={'description'} className={'task-list__form-label'}>
                 Описание:
             </label>
-            <input type={"text"} onChange={(e) => setTasksDescription(e.target.value)}/>
-            <label>
+            <textarea type={"text"} id={'description'} onChange={(e) => setTasksDescription(e.target.value)} className={'task-list__form-input form-input__textarea'}/>
+
+            <label htmlFor={'date-end'} className={'task-list__form-label'}>
                 Срок выполнения до:
             </label>
-            <input type={"date"} onChange={(e) => setEnd_date(e.target.value)}/>
+            <input type={"date"} id={'date-end'} onChange={(e) => setEnd_date(e.target.value)} className={'task-list__form-input'}/>
 
-            <button type={"submit"}>
+            <ConfirmButton type={"submit"}>
                 Добавить задачу
-            </button>
+            </ConfirmButton>
         </form>
     );
 };
